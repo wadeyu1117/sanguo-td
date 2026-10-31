@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>三國守城 · 3D 塔防</title>
+  <meta name="description" content="以三國演義為主題的 3D 網頁塔防遊戲：四大古戰場（赤壁、長板坡、虎牢關、雲夢澤），選擇蜀、魏、吳陣營六大名將守住城池。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+
+  <!-- 戰場與陣營選擇 -->
+  <section id="faction-screen" class="overlay">
+    <div class="scroll">
+      <h1>三國守城</h1>
+      <p class="subtitle">天下大勢分久必合。先擇古戰場，再選一方陣營遣將守城。</p>
+      <div class="section-heading">一、擇一古戰場（點擊預覽地形與專屬敵軍）</div>
+      <div class="stage-list" id="stage-list"></div>
+      <div class="section-heading">二、擇一陣營（各率六員名將出征）</div>
+      <div class="faction-list" id="faction-list"></div>
+      <p class="hint">左鍵／點擊：放置・選取武將・施放無雙（數字鍵 1～6 選將）　·　右鍵拖曳或雙指：旋轉視角　·　滾輪或雙指捏合：縮放　·　空白鍵出戰　·　P 暫停　·　Q 全體無雙</p>
+    </div>
+  </section>
+
+  <!-- HUD -->
+  <header id="hud" class="hidden">
+    <div class="stat"><span class="label">戰場</span><span id="stage-name">赤壁</span></div>
+    <div class="stat"><span class="label">糧餉</span><span id="gold">0</span></div>
+    <div class="stat"><span class="label">城防</span><span id="lives">0</span></div>
+    <div class="stat"><span class="label">波次</span><span id="wave">0 / 10</span></div>
+    <div class="spacer"></div>
+    <button id="menu-btn" class="btn ghost" title="返回選單更換戰場或陣營">換戰場</button>
+    <button id="ult-btn" class="btn ghost" title="無雙技施放方式">無雙 手動</button>
+    <button id="pause-btn" class="btn ghost">⏸ 暫停</button>
+    <button id="music-btn" class="btn ghost">♪ 音樂 開</button>
+    <button id="speed-btn" class="btn ghost">速度 ×1</button>
+    <button id="wave-btn" class="btn primary">出 戰</button>
+  </header>
+
+  <!-- 武將欄 -->
+  <nav id="tower-bar" class="hidden"></nav>
+
+  <!-- 選取武將面板 -->
+  <aside id="tower-panel" class="hidden">
+    <img id="tp-portrait" alt="" />
+    <h2 id="tp-name"></h2>
+    <p id="tp-desc"></p>
+    <dl id="tp-stats"></dl>
+    <div class="row">
+      <button id="tp-upgrade" class="btn primary"></button>
+      <button id="tp-sell" class="btn ghost"></button>
+    </div>
+  </aside>
+
+  <div id="toast"></div>
+  <div id="wave-preview"></div>
+  <div id="tutorial" class="hidden"></div>
+  <div id="pause-overlay" class="hidden"><div>暫 停<small>點擊或按 P 繼續</small></div></div>
+  <div id="boss-banner"><img src="./portraits/boss_lubu.png" alt="Boss" /><div><b>呂布</b><span>人中呂布，馬中赤兔</span></div></div>
+
+  <section id="end-screen" class="overlay hidden">
+    <div class="scroll">
+      <h1 id="end-title"></h1>
+      <div id="end-stars"></div>
+      <p class="subtitle" id="end-sub"></p>
+      <p class="hint" id="end-best"></p>
+      <button class="btn primary" onclick="location.reload()">再戰一回</button>
+    </div>
+  </section>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
