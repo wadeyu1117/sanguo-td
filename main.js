@@ -103,9 +103,9 @@ const STAGES = {
     sky: 0x261a20, fog: 0x342026, ground: 0x455446, tileA: 0x536652, tileB: 0x4b5c4a, path: 0x8a6448,
     waypoints: [[0, 2], [4, 2], [4, 8], [9, 8], [9, 2], [13, 2], [13, 7], [17, 7]],
     waves: {
-      1:  [['sailor', 8, 0.9]],
-      2:  [['sailor', 10, 0.8], ['fire_raider', 4, 0.6]],
-      3:  [['sailor', 8, 0.7], ['naval_shield', 4, 1.2], ['fire_raider', 5, 0.5]],
+      1:  [['sailor', 6, 1.05]],
+      2:  [['sailor', 8, 0.9], ['fire_raider', 3, 0.75]],
+      3:  [['sailor', 7, 0.8], ['naval_shield', 3, 1.3], ['fire_raider', 4, 0.65]],
       4:  [['sailor', 10, 0.6], ['zhangyun', 1, 2.5], ['naval_shield', 4, 1.1]],
       5:  [['naval_shield', 6, 1.0], ['fire_raider', 8, 0.45], ['sailor', 10, 0.5]],
       6:  [['naval_shield', 8, 0.9], ['fire_raider', 10, 0.4], ['sailor', 8, 0.5]],
@@ -122,9 +122,9 @@ const STAGES = {
     sky: 0xcfd9d2, fog: 0xcfd9d2, ground: 0x6f9650, tileA: 0x82ab5d, tileB: 0x7aa256, path: 0xd4ba88,
     waypoints: [[0, 8], [4, 8], [4, 2], [8, 2], [8, 7], [13, 7], [13, 3], [16, 3], [16, 7], [17, 7]],
     waves: {
-      1:  [['wei_soldier', 8, 0.9]],
-      2:  [['wei_soldier', 10, 0.8], ['tiger_cav', 4, 0.6]],
-      3:  [['wei_soldier', 8, 0.7], ['ram_cart', 3, 1.4], ['tiger_cav', 5, 0.5]],
+      1:  [['wei_soldier', 6, 1.05]],
+      2:  [['wei_soldier', 8, 0.9], ['tiger_cav', 3, 0.75]],
+      3:  [['wei_soldier', 7, 0.8], ['ram_cart', 2, 1.5], ['tiger_cav', 4, 0.65]],
       4:  [['wei_soldier', 10, 0.6], ['xiahouen', 1, 2.5], ['ram_cart', 4, 1.2]],
       5:  [['ram_cart', 5, 1.1], ['tiger_cav', 8, 0.45], ['wei_soldier', 10, 0.5]],
       6:  [['ram_cart', 7, 1.0], ['tiger_cav', 9, 0.4], ['wei_soldier', 8, 0.5]],
@@ -141,9 +141,9 @@ const STAGES = {
     sky: 0xdcc4a2, fog: 0xdcc4a2, ground: 0xa68958, tileA: 0xb89a67, tileB: 0xb09260, path: 0xd9c298,
     waypoints: [[0, 2], [5, 2], [5, 8], [10, 8], [10, 3], [14, 3], [14, 7], [17, 7]],
     waves: {
-      1:  [['soldier', 8, 0.9]],
-      2:  [['soldier', 10, 0.8], ['cavalry', 4, 0.6]],
-      3:  [['soldier', 8, 0.7], ['shield', 4, 1.2], ['cavalry', 5, 0.5]],
+      1:  [['soldier', 6, 1.05]],
+      2:  [['soldier', 8, 0.9], ['cavalry', 3, 0.75]],
+      3:  [['soldier', 7, 0.8], ['shield', 3, 1.3], ['cavalry', 4, 0.65]],
       4:  [['soldier', 10, 0.6], ['huaxiong', 1, 2.5], ['shield', 4, 1.1]],
       5:  [['shield', 6, 1.0], ['cavalry', 8, 0.45], ['soldier', 10, 0.5]],
       6:  [['shield', 8, 0.9], ['cavalry', 9, 0.4], ['soldier', 8, 0.5]],
@@ -160,9 +160,9 @@ const STAGES = {
     sky: 0x8ca683, fog: 0x8ca683, ground: 0x486642, tileA: 0x56784e, tileB: 0x4f7047, path: 0x9c8b65,
     waypoints: [[0, 5], [3, 5], [3, 1], [7, 1], [7, 9], [11, 9], [11, 3], [15, 3], [15, 7], [17, 7]],
     waves: {
-      1:  [['poison_dart', 8, 0.85]],
-      2:  [['poison_dart', 9, 0.75], ['rattan', 4, 0.9]],
-      3:  [['poison_dart', 8, 0.65], ['rattan', 5, 0.9], ['elephant', 2, 1.5]],
+      1:  [['poison_dart', 6, 1.0]],
+      2:  [['poison_dart', 7, 0.85], ['rattan', 3, 1.0]],
+      3:  [['poison_dart', 7, 0.75], ['rattan', 4, 1.0], ['elephant', 1, 1.6]],
       4:  [['rattan', 8, 0.75], ['wutugu', 1, 2.5], ['elephant', 3, 1.4]],
       5:  [['rattan', 8, 0.8], ['poison_dart', 10, 0.45], ['elephant', 4, 1.3]],
       6:  [['rattan', 10, 0.75], ['elephant', 5, 1.2], ['poison_dart', 10, 0.45]],
@@ -977,12 +977,22 @@ $('speed-btn').onclick = () => {
 
 function spawnEnemy(type) {
   const t = ENEMY_TYPES[type];
-  const hpScale = (1 + (state.wave - 1) * (t.boss ? DIFF.bossGrowth : DIFF.hpGrowth)) * DIFF.hpMul;
-  const speedScale = (DIFF.speedMul || 1) * (1 + (state.wave - 1) * 0.012);
+  // 三階段波次曲線：1~3波較弱、4~6波變強、7~10波顯著強化
+  const tierHp = state.wave <= 3 ? 0.72 : state.wave <= 6 ? 1.08 : 1.38;
+  const tierSpeed = state.wave <= 3 ? 0.88 : state.wave <= 6 ? 1.05 : 1.15;
+  const hpScale = (1 + (state.wave - 1) * (t.boss ? DIFF.bossGrowth : DIFF.hpGrowth)) * DIFF.hpMul * tierHp;
+  const speedScale = (DIFF.speedMul || 1) * tierSpeed * (1 + (state.wave - 1) * 0.012);
   const mesh = makeEnemy(type);
   mesh.position.copy(pathPoints[0]);
   scene.add(mesh);
-  state.enemies.push({ type, mesh, hp: Math.round(t.hp * hpScale), maxHp: Math.round(t.hp * hpScale), speed: +(t.speed * speedScale).toFixed(2), reward: t.reward, armor: !!t.armor, heal: !!t.heal, healT: 2, seg: 0, dist: 0, slowT: 0, slow: 1, bob: Math.random() * 6, dead: false });
+  state.enemies.push({
+    type, mesh,
+    hp: Math.round(t.hp * hpScale), maxHp: Math.round(t.hp * hpScale),
+    speed: +(t.speed * speedScale).toFixed(2),
+    reward: t.reward, armor: !!t.armor, heal: !!t.heal, boss: !!t.boss,
+    healT: 1.0, skillT: 1.1, hasteT: 0, haste: 1,
+    seg: 0, dist: 0, slowT: 0, slow: 1, bob: Math.random() * 6, dead: false,
+  });
 }
 
 // ---------- 特效 ----------
@@ -1238,16 +1248,57 @@ function update(dt) {
   for (const e of state.enemies) {
     if (e.dead) continue;
     if (e.slowT > 0) { e.slowT -= dt; if (e.slowT <= 0) e.slow = 1; }
+    if (e.hasteT > 0) { e.hasteT -= dt; if (e.hasteT <= 0) e.haste = 1; }
     if (e.heal) {
       e.healT -= dt;
       if (e.healT <= 0) {
-        e.healT = 2.2; spawnRing(e.mesh.position, 4, 0x6aff6a);
-        for (const o of state.enemies) if (!o.dead && o !== e && o.mesh.position.distanceTo(e.mesh.position) < 4) {
-          const h = Math.round(o.maxHp * 0.08); o.hp = Math.min(o.maxHp, o.hp + h); floatText(o.mesh.position, `+${h}`, 'heal');
+        e.healT = 1.35;
+        const skillNames = { zhangjiao: '太平妖術', kuaiyue: '連環鼓舞', zhanghe: '巧變陣法', mulu: '毒瘴呼風' };
+        spawnRing(e.mesh.position, 4.5, 0x6aff6a);
+        spawnPillar(e.mesh.position, 0x6aff6a, 4.5, 0.5, 0.4);
+        floatText(e.mesh.position.clone().add(new THREE.Vector3(0, 1.4, 0)), skillNames[e.type] || '軍師祕策', 'ult-name');
+        for (const o of state.enemies) if (!o.dead && o.mesh.position.distanceTo(e.mesh.position) < 4.5) {
+          const h = Math.round(o.maxHp * 0.11); o.hp = Math.min(o.maxHp, o.hp + h);
+          o.haste = 1.25; o.hasteT = 1.1;
+          if (o !== e) floatText(o.mesh.position, `+${h}`, 'heal');
+        }
+      }
+    } else if (e.boss) {
+      e.skillT -= dt;
+      if (e.skillT <= 0) {
+        const isFinal = !!ENEMY_TYPES[e.type].portrait;
+        e.skillT = isFinal ? 1.45 : 1.65;
+        const bossSkills = {
+          huaxiong: { name: '西涼咆哮', color: 0xff8830 },
+          zhangyun: { name: '水陣突擊', color: 0x38a8ff },
+          xiahouen: { name: '青釭劍氣', color: 0x70b8ff },
+          wutugu:   { name: '鱗甲狂暴', color: 0xd89a38 },
+          boss:         { name: '無雙霸氣', color: 0xff3b2f },
+          boss_caimao:  { name: '水軍齊射', color: 0x2ea8ff },
+          boss_caocao:  { name: '魏武號令', color: 0xa86bff },
+          boss_menghuo: { name: '蠻王怒踏', color: 0xff5a20 },
+        };
+        const sk = bossSkills[e.type] || { name: '猛將狂暴', color: 0xff6a2a };
+        const rad = isFinal ? 5.5 : 4.2;
+        spawnRing(e.mesh.position, rad, sk.color);
+        if (isFinal) { spawnPillar(e.mesh.position, sk.color, 6.5, 0.7, 0.45); shake(0.18); Sound.play('boom'); }
+        floatText(e.mesh.position.clone().add(new THREE.Vector3(0, 1.5, 0)), sk.name, 'ult-name');
+        // 清除自身緩速、短暫加速衝鋒並自我回血
+        e.slow = 1; e.slowT = 0;
+        e.haste = isFinal ? 1.45 : 1.35; e.hasteT = 0.9;
+        const selfHeal = Math.round(e.maxHp * (isFinal ? 0.05 : 0.03));
+        e.hp = Math.min(e.maxHp, e.hp + selfHeal);
+        // 震懾範圍內守軍武將（短暫延遲攻擊冷卻）並激勵周圍敵軍加速
+        for (const t of state.towers) if (t.pos.distanceTo(e.mesh.position) <= rad) {
+          t.cooldown += isFinal ? 0.5 : 0.35;
+          spawnDust(t.pos, sk.color, 5, 0.5);
+        }
+        for (const o of state.enemies) if (!o.dead && o !== e && o.mesh.position.distanceTo(e.mesh.position) < rad) {
+          o.haste = 1.25; o.hasteT = 1.0;
         }
       }
     }
-    let move = e.speed * e.slow * dt;
+    let move = e.speed * e.slow * (e.haste || 1) * dt;
     while (move > 0 && e.seg < pathPoints.length - 1) {
       const a = pathPoints[e.seg], b = pathPoints[e.seg + 1];
       const segLen = a.distanceTo(b);
