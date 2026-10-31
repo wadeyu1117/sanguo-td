@@ -11,7 +11,7 @@ const portrait = (key) => (window.__PORTRAITS && window.__PORTRAITS[key]) || `${
 // ============================================================
 const COLS = 18, ROWS = 11, CELL = 2;
 const TOTAL_WAVES = 10;
-const DIFF = { startLives: 3, hpMul: 2.0, hpGrowth: 0.48, speedMul: 1.25, startGold: 260, waveBonus: 32, waveBonusGrowth: 8, bossGrowth: 0.32 };
+const DIFF = { startLives: 3, hpMul: 1.65, hpGrowth: 0.42, speedMul: 1.1, startGold: 280, waveBonus: 35, waveBonusGrowth: 8, bossGrowth: 0.26 };
 
 // 六種兵種原型（各陣營 6 位名將）
 const ARCHETYPES = {
@@ -62,36 +62,36 @@ const FACTIONS = {
 // 四大古戰場所有敵軍定義
 const ENEMY_TYPES = {
   // 虎牢關（董卓聯軍 & 黃巾軍）
-  soldier:      { name: '黃巾兵',   hp: 75,   speed: 2.6,  reward: 6,   scale: 1.0,  color: 0xc9a227 },
-  cavalry:      { name: '西涼狼騎', hp: 62,   speed: 4.6,  reward: 8,   scale: 1.0,  color: 0xb88a1e, mounted: true, horseColor: 0x6e4b2e },
-  shield:       { name: '陷陣重盾', hp: 240,  speed: 1.75, reward: 12,  scale: 1.15, color: 0x8a6d1a, hasShield: true },
-  huaxiong:     { name: '華雄',     hp: 1450, speed: 1.75, reward: 100, scale: 1.6,  color: 0x4a3a32, boss: true, lives: 2, quote: '董卓帳下驍將，連斬數員大將' },
-  zhangjiao:    { name: '張角',     hp: 2150, speed: 1.55, reward: 130, scale: 1.6,  color: 0xe0c040, boss: true, heal: true, lives: 2, quote: '蒼天已死，黃天當立！（會為周圍敵軍回血）' },
-  boss:         { name: '呂布',     hp: 3400, speed: 1.85, reward: 200, scale: 1.6,  color: 0x7a1f1f, boss: true, mounted: true, horseColor: 0xb0261c, portrait: 'boss_lubu', lives: 3, quote: '人中呂布，馬中赤兔' },
+  soldier:      { name: '黃巾兵',   hp: 66,   speed: 2.45, reward: 6,   scale: 1.0,  color: 0xc9a227 },
+  cavalry:      { name: '西涼狼騎', hp: 54,   speed: 4.35, reward: 8,   scale: 1.0,  color: 0xb88a1e, mounted: true, horseColor: 0x6e4b2e },
+  shield:       { name: '陷陣重盾', hp: 210,  speed: 1.6,  reward: 12,  scale: 1.15, color: 0x8a6d1a, hasShield: true },
+  huaxiong:     { name: '華雄',     hp: 1250, speed: 1.6,  reward: 100, scale: 1.6,  color: 0x4a3a32, boss: true, lives: 2, quote: '董卓帳下驍將，連斬數員大將' },
+  zhangjiao:    { name: '張角',     hp: 1880, speed: 1.4,  reward: 130, scale: 1.6,  color: 0xe0c040, boss: true, heal: true, lives: 2, quote: '蒼天已死，黃天當立！（會為周圍敵軍回血）' },
+  boss:         { name: '呂布',     hp: 2900, speed: 1.7,  reward: 200, scale: 1.6,  color: 0x7a1f1f, boss: true, mounted: true, horseColor: 0xb0261c, portrait: 'boss_lubu', lives: 3, quote: '人中呂布，馬中赤兔' },
 
   // 赤壁（荊州水軍 & 連環戰船部隊）
-  sailor:       { name: '荊州水兵', hp: 72,   speed: 2.8,  reward: 6,   scale: 1.0,  color: 0x2b628f },
-  naval_shield: { name: '鐵索盾衛', hp: 250,  speed: 1.7,  reward: 12,  scale: 1.15, color: 0x35485e, hasShield: true, armor: true },
-  fire_raider:  { name: '火船死士', hp: 66,   speed: 4.75, reward: 9,   scale: 1.0,  color: 0xd84318, fireTorch: true },
-  zhangyun:     { name: '張允',     hp: 1500, speed: 1.75, reward: 100, scale: 1.55, color: 0x264b73, boss: true, lives: 2, quote: '荊州水軍副都督，熟諳江戰！' },
-  kuaiyue:      { name: '蒯越',     hp: 2150, speed: 1.6,  reward: 130, scale: 1.55, color: 0x4a3b7a, boss: true, heal: true, lives: 2, quote: '鐵索連舟，如履平地！（為周圍水軍回血）' },
-  boss_caimao:  { name: '蔡瑁',     hp: 3450, speed: 1.85, reward: 200, scale: 1.65, color: 0x1c3b61, boss: true, mounted: true, horseColor: 0x2c3b4d, portrait: 'boss_caimao', lives: 3, quote: '水軍大都督，連環大艦壓境！' },
+  sailor:       { name: '荊州水兵', hp: 64,   speed: 2.6,  reward: 6,   scale: 1.0,  color: 0x2b628f },
+  naval_shield: { name: '鐵索盾衛', hp: 220,  speed: 1.55, reward: 12,  scale: 1.15, color: 0x35485e, hasShield: true, armor: true },
+  fire_raider:  { name: '火船死士', hp: 58,   speed: 4.45, reward: 9,   scale: 1.0,  color: 0xd84318, fireTorch: true },
+  zhangyun:     { name: '張允',     hp: 1280, speed: 1.6,  reward: 100, scale: 1.55, color: 0x264b73, boss: true, lives: 2, quote: '荊州水軍副都督，熟諳江戰！' },
+  kuaiyue:      { name: '蒯越',     hp: 1880, speed: 1.45, reward: 130, scale: 1.55, color: 0x4a3b7a, boss: true, heal: true, lives: 2, quote: '鐵索連舟，如履平地！（為周圍水軍回血）' },
+  boss_caimao:  { name: '蔡瑁',     hp: 2950, speed: 1.7,  reward: 200, scale: 1.65, color: 0x1c3b61, boss: true, mounted: true, horseColor: 0x2c3b4d, portrait: 'boss_caimao', lives: 3, quote: '水軍大都督，連環大艦壓境！' },
 
   // 長板坡（曹操南征虎豹精銳）
-  wei_soldier:  { name: '青州步卒', hp: 78,   speed: 2.6,  reward: 6,   scale: 1.0,  color: 0x2d5fa8 },
-  tiger_cav:    { name: '虎豹鐵騎', hp: 70,   speed: 4.8,  reward: 9,   scale: 1.05, color: 0x1e293b, mounted: true, horseColor: 0x1a1a1f },
-  ram_cart:     { name: '攻城衝車', hp: 290,  speed: 1.6,  reward: 14,  scale: 1.22, color: 0x5c4028, armor: true, cart: true, lives: 1 },
-  xiahouen:     { name: '夏侯恩',   hp: 1500, speed: 1.8,  reward: 100, scale: 1.55, color: 0x284b82, boss: true, lives: 2, quote: '背負丞相青釭寶劍，恃勇輕進！' },
-  zhanghe:      { name: '張郃',     hp: 2200, speed: 1.65, reward: 130, scale: 1.55, color: 0x3b2d66, boss: true, heal: true, lives: 2, quote: '河北名將，巧變善陣！（激勵周圍曹軍回血）' },
-  boss_caocao:  { name: '曹操',     hp: 3500, speed: 1.85, reward: 200, scale: 1.65, color: 0x1b2a4a, boss: true, mounted: true, horseColor: 0xf0ece0, portrait: 'boss_caocao', lives: 3, quote: '寧教我負天下人，休教天下人負我！' },
+  wei_soldier:  { name: '青州步卒', hp: 68,   speed: 2.45, reward: 6,   scale: 1.0,  color: 0x2d5fa8 },
+  tiger_cav:    { name: '虎豹鐵騎', hp: 62,   speed: 4.5,  reward: 9,   scale: 1.05, color: 0x1e293b, mounted: true, horseColor: 0x1a1a1f },
+  ram_cart:     { name: '攻城衝車', hp: 255,  speed: 1.48, reward: 14,  scale: 1.22, color: 0x5c4028, armor: true, cart: true, lives: 1 },
+  xiahouen:     { name: '夏侯恩',   hp: 1280, speed: 1.65, reward: 100, scale: 1.55, color: 0x284b82, boss: true, lives: 2, quote: '背負丞相青釭寶劍，恃勇輕進！' },
+  zhanghe:      { name: '張郃',     hp: 1920, speed: 1.5,  reward: 130, scale: 1.55, color: 0x3b2d66, boss: true, heal: true, lives: 2, quote: '河北名將，巧變善陣！（激勵周圍曹軍回血）' },
+  boss_caocao:  { name: '曹操',     hp: 3000, speed: 1.7,  reward: 200, scale: 1.65, color: 0x1b2a4a, boss: true, mounted: true, horseColor: 0xf0ece0, portrait: 'boss_caocao', lives: 3, quote: '寧教我負天下人，休教天下人負我！' },
 
   // 雲夢澤（南蠻藤甲與猛獸大軍）
-  poison_dart:  { name: '毒吹箭手', hp: 65,   speed: 4.1,  reward: 7,   scale: 0.96, color: 0x3b7a4a },
-  rattan:       { name: '南蠻藤甲', hp: 195,  speed: 2.25, reward: 12,  scale: 1.1,  color: 0x9a7a3a, armor: true },
-  elephant:     { name: '南蠻戰象', hp: 330,  speed: 1.62, reward: 15,  scale: 1.3,  color: 0x6e6a64, elephant: true, lives: 1 },
-  wutugu:       { name: '兀突骨',   hp: 1600, speed: 1.65, reward: 100, scale: 1.7,  color: 0x5a4628, boss: true, armor: true, lives: 2, quote: '烏戈國主，身披鱗甲，刀箭減半！' },
-  mulu:         { name: '木鹿大王', hp: 2200, speed: 1.6,  reward: 130, scale: 1.6,  color: 0x5a8c32, boss: true, heal: true, elephant: true, lives: 2, quote: '驅象呼風，毒瘴護體！（為周圍蠻兵回血）' },
-  boss_menghuo: { name: '孟獲',     hp: 3600, speed: 1.8,  reward: 200, scale: 1.7,  color: 0x8a2e1a, boss: true, elephant: true, portrait: 'boss_menghuo', lives: 3, quote: '七擒七縱，南蠻巨象踏平城池！' },
+  poison_dart:  { name: '毒吹箭手', hp: 56,   speed: 3.85, reward: 7,   scale: 0.96, color: 0x3b7a4a },
+  rattan:       { name: '南蠻藤甲', hp: 172,  speed: 2.1,  reward: 12,  scale: 1.1,  color: 0x9a7a3a, armor: true },
+  elephant:     { name: '南蠻戰象', hp: 290,  speed: 1.48, reward: 15,  scale: 1.3,  color: 0x6e6a64, elephant: true, lives: 1 },
+  wutugu:       { name: '兀突骨',   hp: 1380, speed: 1.5,  reward: 100, scale: 1.7,  color: 0x5a4628, boss: true, armor: true, lives: 2, quote: '烏戈國主，身披鱗甲，刀箭減半！' },
+  mulu:         { name: '木鹿大王', hp: 1920, speed: 1.45, reward: 130, scale: 1.6,  color: 0x5a8c32, boss: true, heal: true, elephant: true, lives: 2, quote: '驅象呼風，毒瘴護體！（為周圍蠻兵回血）' },
+  boss_menghuo: { name: '孟獲',     hp: 3050, speed: 1.65, reward: 200, scale: 1.7,  color: 0x8a2e1a, boss: true, elephant: true, portrait: 'boss_menghuo', lives: 3, quote: '七擒七縱，南蠻巨象踏平城池！' },
 };
 
 // 四大古戰場設定
@@ -978,7 +978,7 @@ $('speed-btn').onclick = () => {
 function spawnEnemy(type) {
   const t = ENEMY_TYPES[type];
   const hpScale = (1 + (state.wave - 1) * (t.boss ? DIFF.bossGrowth : DIFF.hpGrowth)) * DIFF.hpMul;
-  const speedScale = (DIFF.speedMul || 1) * (1 + (state.wave - 1) * 0.025);
+  const speedScale = (DIFF.speedMul || 1) * (1 + (state.wave - 1) * 0.012);
   const mesh = makeEnemy(type);
   mesh.position.copy(pathPoints[0]);
   scene.add(mesh);
